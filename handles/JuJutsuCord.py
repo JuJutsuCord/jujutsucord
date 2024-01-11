@@ -5,6 +5,21 @@ from guilds import *
 from userinfo import *
 from embeds import *
 
+class jjcord:
+    _commands = {}
+
+    @classmethod
+    def command(cls, name=None, **attrs):
+        def decorator(func):
+            if name is None:
+                raise ValueError("Command name must be specified.")
+
+            cls._commands[name] = func
+
+            return func
+
+        return decorator
+
 class JuJutsuCord(commands.Bot):
     def __init__(self, command_prefix, **options):
         super().__init__(command_prefix, **options)
